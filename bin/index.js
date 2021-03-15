@@ -1,14 +1,13 @@
-const commandLineArgs = require('command-line-args')
-const fs = require('fs');
-const getAudioDecoder = require('audio-file-decoder');
-// import { getAudioDecoder } from 'audio-file-decoder';
-// import DecodeAudioWasm from 'audio-file-decoder/decode-audio.wasm'; 
+#!/usr/bin/env node
 
-const optionDefinitions = [
-    { name: 'dir', alias: 'd', type: String },
-  ]
-  
-  const options = commandLineArgs(optionDefinitions)
+const yargs = require("yargs");
+const fs = require('fs');
+const { processAudioFile } = require('../audioFileUtils');
+
+const options = yargs
+ .usage("Usage: -d <name>")
+ .option("d", { alias: "dir", describe: "Directory to process", type: "string", demandOption: true })
+ .argv;
 
 
 console.log(`get it! options = ${JSON.stringify(options)}`);
@@ -25,15 +24,17 @@ if (options.dir) {
         // files object contains all files names
         // log them on console
         files.forEach( (fileName, fileIdx ) => {
-            if (fileIdx === -1) {
+            if (fileIdx === 0) {
                 console.log(`${fileIdx} = ${fileName}`);
-                const fullFile = `${dir}/${fileName}`;
+                const fullPath = `${dir}/${fileName}`;
+                processAudioFile(fullPath);
+                /*
                 fs.readFile(fullFile, function (err, data) {
                     if (err) {
                        return console.error(err);
                     }
                     console.log("Content: " + data.toString());
-                 });
+                 });*/
                 
             }
         });

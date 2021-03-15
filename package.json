@@ -2,7 +2,10 @@
   "name": "mp4Convert",
   "version": "1.0.0",
   "description": "",
-  "main": "hello.js",
+  "main": "bin/index.js",
+  "bin": {
+    "mp4Convert": "./bin/index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,6 +17,9 @@
     "@babel/node": "^7.13.10",
     "@babel/preset-env": "^7.13.10",
     "audio-file-decoder": "^2.2.1",
-    "command-line-args": "^5.1.1"
+    "yargs": "^13.2.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0"
   }
 }
